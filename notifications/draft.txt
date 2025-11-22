@@ -1,0 +1,14 @@
+8084780633:AAEjmW8z95d_pOxM3fRQu0RYoF9elSFjkXQ
+
+https://api.telegram.org/8084780633:AAEjmW8z95d_pOxM3fRQu0RYoF9elSFjkXQ/getUpdates
+
+-1003273643293
+
+curl -X POST \
+     -H 'Content-Type: application/json' \
+     -d '{"chat_id": "-1003273643293", "text": "Это тестовое сообщение", "disable_notification": true}' \
+     https://api.telegram.org/bot$8084780633:AAEjmW8z95d_pOxM3fRQu0RYoF9elSFjkXQ/sendMessage
+
+     Команда для отправки сообщения из консоли
+
+     curl -X POST -H 'Content-Type: application/json' -d '{"chat_id": "-1003273643293", "text": "Это тестовое сообщение", "disable_notification": true}' https://api.telegram.org/bot8084780633:AAEjmW8z95d_pOxM3fRQu0RYoF9elSFjkXQ/sendMessage
