@@ -19,30 +19,30 @@ public class TestBase {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 10000;
+
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion", "127.0");
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
-//        Configuration.remote = System.getProperty("remoteUrl", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
-        Configuration.holdBrowserOpen = true;
 
-        String remoteUrl = System.getProperty("remoteUrl"); // настройка для локального запуска, не забыть удалить и раскоментировать верхнюю строку
-        if (remoteUrl != null && !remoteUrl.isBlank()) {  // настройка для локального запуска, не забыть удалить и раскоментировать верхнюю строку
-            Configuration.remote = remoteUrl;// настройка для локального запуска, не забыть удалить и раскоментировать верхнюю строку
+        // по умолчанию — удалённый запуск в Selenoid (можно переопределить через -DremoteUrl=...)
+        String remoteUrl = System.getProperty(
+                "remoteUrl",
+                "https://user1:1234@selenoid.autotests.cloud/wd/hub"
+        );
+        Configuration.remote = remoteUrl;
 
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                    "enableVNC", true,
-                    "enableVideo", true
-            ));
-            Configuration.browserCapabilities = capabilities;
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
 
-            SelenideLogger.addListener("allure", new AllureSelenide());
-        }
+        SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
-
     @AfterEach
-    void closeBrowser() {
+    void tearDown() {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
