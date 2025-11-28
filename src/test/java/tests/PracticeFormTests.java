@@ -9,7 +9,7 @@ import data.TestData;
 
 import static io.qameta.allure.Allure.step;
 
-public class PracticeFormWithGeneratedDataTest extends TestBase {
+public class PracticeFormTests extends TestBase {
 
     PracticeFormPage practiceFormPage = new PracticeFormPage();
 
