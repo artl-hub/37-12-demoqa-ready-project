@@ -9,6 +9,9 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import data.enums.Subjects;
+import java.util.List;
+
 
 public class PracticeFormPage {
 
@@ -81,6 +84,13 @@ public class PracticeFormPage {
         subjectInput.setValue(value).pressEnter();
         return this;
     }
+//    .................................................................
+    public PracticeFormPage setSubjects(List<Subjects> subjects) {
+        subjects.forEach(s -> setSubject(s.name()));
+        return this;
+    }
+ //    .................................................................
+
 
     public PracticeFormPage setHobbies(String value) {
         hobbiesWraper.$(byText(value)).click();
@@ -128,13 +138,6 @@ public class PracticeFormPage {
         submitButton.click();
         return this;
     }
-
-
-//    public PracticeFormPage checkResult(String key, String value) {
-//        checkResultComponent.checkResult(key, value);
-//
-//        return this;
-//    }
 
     public PracticeFormPage checkResult(String key, String... values) {
         String expectedValue = String.join(" ", values); // объединяет все значения

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
-import utils.TestData;
+import data.TestData;
 
 import static io.qameta.allure.Allure.step;
 
@@ -221,10 +221,8 @@ public class PracticeFormWithGeneratedDataTest extends TestBase {
         });
 
         step("Select multiple subjects", () -> {
-            practiceFormPage
-                    .setSubject("Math")
-                    .setSubject("Physics")
-                    .setSubject("Chemistry");
+            practiceFormPage.setSubjects(data.subjectsList);
+
         });
 
         step("Scroll and submit", () -> {
@@ -234,7 +232,7 @@ public class PracticeFormWithGeneratedDataTest extends TestBase {
 
         step("Check the modal window results", () -> {
             practiceFormPage
-                    .checkResult("Subjects", "Maths, Physics, Chemistry"); //Maths, Physics, Chemistry
+                    .checkResult("Subjects", data.subjectsString);
         });
 
         step("Close modal", () -> {

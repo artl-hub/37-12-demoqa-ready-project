@@ -1,10 +1,11 @@
 package utils;
 
 import com.github.javafaker.Faker;
+import data.enums.Subjects;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class RandomUtils {
 
@@ -76,4 +77,21 @@ public class RandomUtils {
             default -> "";
         };
     }
+
+
+    public static List<Subjects> getRandomSubjects(int count) {
+        List<Subjects> all = new ArrayList<>(List.of(Subjects.values()));
+        Collections.shuffle(all);
+        return all.subList(0, count);
+    }
+
+    public static String convertSubjectsToString(List<Subjects> subjects) {
+        return subjects.stream()
+                .map(Enum::name)
+                .collect(Collectors.joining(", "));
+    }
+
+
+
+
 }
