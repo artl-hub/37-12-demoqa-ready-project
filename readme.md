@@ -98,7 +98,7 @@ To access Jenkins, registration on the [Jenkins](https://jenkins.autotests.cloud
 ###  Build parameters in Jenkins:
 
 - BROWSER (browser to run tests, default is chrome)
-- BROWSER_VERSION (browser version, e.g. 120, 121, 127, 128)
+- BROWSER_VERSION (browser version For Chrome – versions 127, 128; For Firefox – versions 124, 125)
 - BROWSER_SIZE (browser window size, default is 1920×1080)
 - TEST_TAG (set of tests to run: positive, negative, all_tests)
 
