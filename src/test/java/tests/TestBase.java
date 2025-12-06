@@ -27,7 +27,12 @@ public class TestBase {
 
         // по умолчанию — удалённый запуск в Selenoid (можно переопределить через -DremoteUrl=...)
         String remoteUrl = System.getProperty("remoteUrl");
-        if (remoteUrl != null && !remoteUrl.isEmpty()) {
+
+        if (remoteUrl == null || remoteUrl.isBlank()) {
+            remoteUrl = System.getenv("REMOTE_URL");
+        }
+
+        if (remoteUrl != null && !remoteUrl.isBlank()) {
             Configuration.remote = remoteUrl;
         }
 
