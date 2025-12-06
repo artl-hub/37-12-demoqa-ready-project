@@ -25,17 +25,7 @@ public class TestBase {
         Configuration.browserVersion = System.getProperty("browserVersion", "127.0");
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
 
-        // по умолчанию — удалённый запуск в Selenoid (можно переопределить через -DremoteUrl=...)
-        String remoteUrl = System.getProperty("remoteUrl");
-
-        if (remoteUrl == null || remoteUrl.isBlank()) {
-            remoteUrl = System.getenv("REMOTE_URL");
-        }
-
-        if (remoteUrl != null && !remoteUrl.isBlank()) {
-            Configuration.remote = remoteUrl;
-        }
-
+        Configuration.remote = System.getProperty("remoteUrl");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of("enableVNC", true, "enableVideo", true));
