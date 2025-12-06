@@ -9,7 +9,6 @@ import java.util.List;
 import static utils.RandomUtils.*;
 
 public class TestData {
-    private static final Faker faker = new Faker();
 
     public final String firstName = getFirstName();
     public final String lastName = getLastName();

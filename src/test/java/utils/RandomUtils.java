@@ -28,12 +28,7 @@ public class RandomUtils {
     }
 
     public static String getUserNumber() {
-        return faker.phoneNumber().subscriberNumber(10);
-    }
-
-    public static String getSubject() {
-        return faker.options().option("English", "Maths", "Biology");
-    }
+        return faker.phoneNumber().subscriberNumber(10);    }
 
     public static String getHobby() {
         return faker.options().option("Sports", "Reading", "Music");

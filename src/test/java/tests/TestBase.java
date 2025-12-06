@@ -6,6 +6,7 @@ import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
@@ -25,19 +26,20 @@ public class TestBase {
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
 
         // по умолчанию — удалённый запуск в Selenoid (можно переопределить через -DremoteUrl=...)
-        String remoteUrl = System.getProperty(
-                "remoteUrl",
-                "https://user1:1234@selenoid.autotests.cloud/wd/hub"
-        );
-        Configuration.remote = remoteUrl;
+        String remoteUrl = System.getProperty("remoteUrl");
+        if (remoteUrl != null && !remoteUrl.isEmpty()) {
+            Configuration.remote = remoteUrl;
+        }
+
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of("enableVNC", true, "enableVideo", true));
         Configuration.browserCapabilities = capabilities;
+    }
 
+    @BeforeEach
+    void addAllureListener() {
+        SelenideLogger.removeListener("allure");
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
